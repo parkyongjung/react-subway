@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { getData } from '../../hooks/useAxios';
 
 const drift = keyframes`
 from { transform: rotate(0deg); }
@@ -94,6 +96,19 @@ const MainTitle = styled.div`
 `;
 
 const Main = () => {
+    useEffect(() => {
+        // User 조회 -> GET 요청
+        const fetchEventList = async () => {
+            try {
+                const response = await getData('/api/ingredient/list');
+                console.log('Event List:', response);
+            } catch (error: any) {
+                console.error('Error fetching event list:', error);
+            }
+        };
+        fetchEventList();
+    }, []);
+
     return (
         <>
             <MainBoxStyle>
