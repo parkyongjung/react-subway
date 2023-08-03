@@ -1,25 +1,293 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(#80ffdb, #64dfdf, #48bfe3, #5390d9, #5e60ce);
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    padding: 0;
-    margin: 0;
+@font-face {
+    font-family: 'nskr';
+    src: local('NotoSans Regular'),
+        url('./assets/fonts/NotoSansKR-Regular.woff2') format('woff2'),
+        url('./assets/fonts/NotoSansKR-Regular.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+@font-face {
+    font-family: 'nskr';
+    src: local('NotoSans Medium'),
+        url('./assets/fonts/NotoSansKR-Medium.woff2') format('woff2'),
+        url('./assets/fonts/NotoSansKR-Medium.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
 }
-.container {
-    position: relative;
-    width: 800px;
-    margin: 0 auto;
-    margin-top: 120px;
+
+@font-face {
+    font-family: 'nskr';
+    src: local('NotoSans Bold'),
+        url('./assets/fonts/NotoSansKR-Bold.woff2') format('woff2'),
+        url('./assets/fonts/NotoSansKR-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+blockquote,
+pre,
+abbr,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+main,
+article,
+aside,
+address,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-text-size-adjust: none;
+    -ms-high-contrast-adjust: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+fieldset,
+img {
+    border: 0 none;
+}
+
+img {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+ul,
+ol,
+menu,
+li {
+    list-style: none;
+}
+
+label {
+    vertical-align: middle;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var,
+optgroup {
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+var,
+i,
+ins {
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    vertical-align: baseline;
+}
+
+iframe {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    border: 0;
+}
+
+audio,
+canvas,
+progress,
+video {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+[hidden],
+template {
+    display: none;
+}
+
+[role='button'],
+a,
+area,
+input,
+label,
+select,
+summary,
+textarea {
+    margin: 0;
+    padding: 0;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    resize: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+a,
+input,
+select,
+textarea,
+button,
+.form-control {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: unset;
+    -ms-background-color: none;
+}
+
+a:hover,
+a:focus,
+input:hover,
+input:focus,
+select:hover,
+select:focus,
+textarea:hover,
+textarea:focus,
+button:hover,
+button:focus,
+.form-control:hover,
+.form-control:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+:root {
+    --bugfix-height: 100%;
+}
+
+body {
+    background-color: #fff;
+    font-family: 'nskr', -apple-system, 'droid sans fallback',
+        'Apple SD Gothic Neo', 'AppleGothic', 'Malgun Gothic', '맑은 고딕',
+        Dotum, '돋움', sans-serif;
+    font-weight: 100;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: #222;
+    word-break: keep-all;
+    word-wrap: break-word;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

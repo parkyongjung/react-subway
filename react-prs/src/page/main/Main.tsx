@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { getData } from '../../hooks/useAxios';
+import { MenuList, ProductList, NewList } from '../../util/commonInterface';
 
 const drift = keyframes`
 from { transform: rotate(0deg); }
@@ -96,18 +97,44 @@ const MainTitle = styled.div`
 `;
 
 const Main = () => {
+    // menuList state 정의
+    const [menuList, setMenuList] = useState<MenuList[]>([]);
+
+    // newsList state 정의
+    const [newsList, setNewsList] = useState<NewList[]>([]);
+
+    // productList state 정의
+    const [productList, setProductList] = useState<ProductList[]>([]);
+    const [datas, setDatas] = useState({});
+
+    let fetchUrl = '/api/main/list';
+
     useEffect(() => {
-        // User 조회 -> GET 요청
-        const fetchEventList = async () => {
-            try {
-                const response = await getData('/api/ingredient/list');
-                console.log('Event List:', response);
-            } catch (error: any) {
-                console.error('Error fetching event list:', error);
+        getAPI();
+
+        function iDataType(
+            data: any
+        ): data is { menuList: any[]; productList: any[]; newsList: any[] } {
+            return (
+                data !== null && typeof data === 'object' && 'menuList' in data
+            );
+        }
+        if (!(datas === undefined) || !(datas === null)) {
+            const mainData = Object.values(datas)[0];
+            if (iDataType(mainData)) {
+                setMenuList(mainData.menuList);
+                setNewsList(mainData.newsList);
+                setProductList(mainData.productList);
+
+                localStorage.setItem('menuList', JSON.stringify(menuList));
             }
-        };
-        fetchEventList();
+        }
     }, []);
+
+    const getAPI = useCallback(async () => {
+        const response = await getData(fetchUrl);
+        setDatas(response);
+    }, [fetchUrl]);
 
     return (
         <>
@@ -117,6 +144,13 @@ const Main = () => {
                 <WaveThree />
                 <MainTitle>Main</MainTitle>
             </MainBoxStyle>
+            <div
+                onClick={() => {
+                    console.log(menuList);
+                }}
+            >
+                test
+            </div>
         </>
     );
 };
