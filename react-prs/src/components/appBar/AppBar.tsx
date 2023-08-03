@@ -61,6 +61,13 @@ const AppBar = () => {
                         <div key={item.men_id}>{item.men_name}</div>
                     ))}
                 </div>
+
+                <div>
+                    <h2>300s</h2>
+                    {men300s.map((item) => (
+                        <div key={item.men_id}>{item.men_name}</div>
+                    ))}
+                </div>
             </AppBarStyle>
         </>
     );
